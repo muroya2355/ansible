@@ -1,0 +1,7 @@
+---
+esx_hostname: ESXI-HOST1
+esx_ipaddr: 192.168.182.116
+esx_user: root
+esx_password: Password@1234
+datastore_name: datastore1
+iso_path: datastore1/osimage/CentOS-7-KickStart.iso

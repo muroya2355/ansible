@@ -1,0 +1,9 @@
+[webservers]
+192.168.182.131
+
+[dbservers]
+192.168.182.132
+
+[inventory:children]
+webservers
+dbservers

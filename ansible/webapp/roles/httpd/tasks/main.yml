@@ -1,0 +1,8 @@
+- name: install httpd
+  yum: name=httpd state=latest
+
+- name: allow firewalld httpd
+  firewalld: permanent=True service=http state=enabled immediate=True
+
+- name: start service
+  service: name=httpd state=started enabled=yes

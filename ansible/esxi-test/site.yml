@@ -1,0 +1,43 @@
+- hosts: 127.0.0.1
+  connection: local
+  become: true
+  become_user: root
+  gather_facts: false
+
+  tasks:
+    - name: Boot up instance
+      vsphere_guest:
+        vcenter_hostname: "{{ esx_ipaddr }}"
+        username: "{{ esx_user }}"
+        password: "{{ esx_password }}"
+        guest: Lubuntu2
+        state: powered_on
+        validate_certs: False
+
+        vm_hw_version: vmx-08
+        vm_extra_config:
+          vcpu.hotadd: yes
+          mem.hotadd:  yes
+          notes: This is a test VM
+        vm_disk:
+          disk1:
+            size_gb: 10
+            type: thin
+            datastore: "{{ datastore_name }}"
+        vm_nic:
+          nic1:
+            type: vmxnet3
+            network: VM Network
+            network_type: standard
+        vm_hardware:
+          memory_mb: 1024
+          num_cpus: 1
+          osid: ubuntu64Guest
+          scsi: paravirtual
+          vm_cdrom:
+            type: "iso"
+            iso_path: "{{ iso_path }}"
+
+        esxi:
+          datacenter: ha-datacenter
+          hostname: "{{ esx_hostname }}"

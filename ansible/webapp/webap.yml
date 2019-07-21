@@ -1,0 +1,7 @@
+- name: deploy web/ap servers
+  hosts: webservers
+  become: yes
+  roles:
+    - common
+    - httpd
+    - tomcat
