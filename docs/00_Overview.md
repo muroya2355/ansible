@@ -12,6 +12,7 @@
 
 * Windows 10 Home
 * VMWare Workstation Player
+* vSphere Web Client
 * VS Code + Java + Spring Boot
 
 唯一の物理マシン、それ以外のサーバはすべて仮想マシン。
@@ -79,6 +80,8 @@ vmdk は ESXi サーバ内のデータストアに格納する。NAS に格納�
 ### 業務LAN
 
 インターネット接続、SWパッケージのダウンロード、業務APでの通信に使用
+
+ルータはPocket Wifi
 
 構成管理サーバ・ファイルサーバはホストOS宛にNAT接続を、ESXiサーバと中の仮想サーバは VMWare Player のブリッジ接続を用いる
 
