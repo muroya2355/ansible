@@ -18,6 +18,8 @@
 唯一の物理マシン、それ以外のサーバはすべて仮想マシン。
 一次の仮想サーバはホストOSの VMWare Workstation Player（個人利用） によって構築される。
 
+ブラウザベースの vSphere Web Client によって、ESXiサーバと、二次の仮想サーバの状態を管理する。
+
 VS Code と Java + Spring Boot フレームワークによってローカルで業務APを開発し、Web/APサーバにデプロイする。
 
 
