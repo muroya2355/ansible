@@ -1,16 +1,24 @@
-- hosts: 127.0.0.1
+---
+- hosts: all
   connection: local
-  become: true
-  become_user: root
+  user: remote
+  sudo: true
   gather_facts: false
 
+  vars:
+    esx_hostname: 'ESXI-HOST1'
+    esx_ipaddr: '192.168.182.116'
+    esx_user: 'root'
+    esx_password: 'Password@1234'
+    datastore_name: 'datastore1'
+    iso_path: 'datastore1/osimage/CentOS-7-KickStart.iso'
+
   tasks:
-    - name: Boot up instance
-      vsphere_guest:
+    - vsphere_guest:
         vcenter_hostname: "{{ esx_ipaddr }}"
         username: "{{ esx_user }}"
         password: "{{ esx_password }}"
-        guest: Lubuntu2
+        guest: "{{ inventory_hostname }}"
         state: powered_on
         validate_certs: False
 
@@ -18,10 +26,9 @@
         vm_extra_config:
           vcpu.hotadd: yes
           mem.hotadd:  yes
-          notes: This is a test VM
         vm_disk:
           disk1:
-            size_gb: 10
+            size_gb: "{{ disk }}"
             type: thin
             datastore: "{{ datastore_name }}"
         vm_nic:
@@ -29,15 +36,19 @@
             type: vmxnet3
             network: VM Network
             network_type: standard
+          nic2:
+            type: vmxnet3
+            network: VM Control Network
+            network_type: standard
         vm_hardware:
-          memory_mb: 1024
-          num_cpus: 1
-          osid: ubuntu64Guest
+          memory_mb: "{{ memory }}"
+          osid: centos7_64Guest
+          num_cpus: "{{ cpu }}"
           scsi: paravirtual
           vm_cdrom:
             type: "iso"
             iso_path: "{{ iso_path }}"
-
         esxi:
           datacenter: ha-datacenter
           hostname: "{{ esx_hostname }}"
+
