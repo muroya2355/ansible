@@ -54,13 +54,30 @@ Ansible の Playbook 実行により
 共有フォルダとして /home/share を作成。
 Ansible の Playbook や iso イメージを格納する。
 
-構成管理サーバからはNFSマウントして使用。ESXi サーバにデータストアとして登録。
+構成管理サーバからはNFSマウントして使用
+
+ESXi サーバにデータストアとして登録
 
 ホストOS へは Samba で公開。本当は NFS マウントと Samba は同時に使用してはならない。
 
 ### ESXi サーバ
 
 * VMWare ESXi 6.7.0 Update 2 (Build 13006603)
+
+無償版 ESXi のため、スタンドアローンで、クラスタを組まない。
+
+Ansible で、スタンドアローン ESXi 内に仮想マシンを作成するときは vsphere_guest モジュールを使用する。vsphere_guest は個人開発で、且つ Ansible バージョン2.9で廃止予定となっているが、どうしたものか。
+
+同じようなモジュールで、VMWare 公式の vmware_guest があるが、こちらは vCenter 必須で、有償版でないと使えない
+
+データストアは、サーバ内部のストレージとファイルサーバを割り当てる
+
+業務LAN用、管理LAN用にそれぞれ vSwitch を持つ。ポートグループは以下の通り
+
+|             | VMkernel | 仮想マシン |
+| ----------- | -------- | --------- |
+| **業務LAN** | Management Network | VM Network         |
+| **管理LAN** | Control Network    | VM Control Network | 
 
 ## 仮想サーバ（二次）
 
@@ -71,7 +88,8 @@ vmdk は ESXi サーバ内のデータストアに格納する。NAS に格納�
 ### Web/AP サーバ
 
 * Apache httpd
-* Tomcat + 業務AP
+* Java + Tomcat
+* 業務AP
 
 ### DB サーバ
 
