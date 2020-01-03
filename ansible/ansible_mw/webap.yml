@@ -1,0 +1,10 @@
+- name: deploy webservers
+  hosts: webap
+  become: yes
+  roles:
+    - common
+    - httpd
+#    - java
+    - tomcat
+    - maven
+#    - terasoluna_app

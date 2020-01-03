@@ -1,0 +1,9 @@
+[webap]
+192.168.153.131
+
+[db]
+192.168.153.132
+
+[staging:children]
+webap
+db

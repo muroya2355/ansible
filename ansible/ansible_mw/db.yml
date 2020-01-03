@@ -1,0 +1,6 @@
+- name: deploy dbservers
+  hosts: db
+  become: yes
+  roles:
+    - common
+    - postgresql
