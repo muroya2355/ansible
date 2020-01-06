@@ -19,20 +19,29 @@ C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna
 C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-env\configs\tomcat8-postgresql\ContainerConfigXML
 -->
 
+```
 scp -r /mnt/hgfs/shared/terasoluna-tourreservation-5.5.1.RELEASE root@192.168.153.131:~/
+```
 
+```
 ssh root@192.168.153.131
 ls
 cd terasoluna-tourreservation-5.5.1.RELEASE/
+```
 
+```
 mvn -f terasoluna-tourreservation-initdb/pom.xml sql:execute
 mvn clean install
 ls terasoluna-tourreservation-web/target/terasoluna-tourreservation-web.war
+```
 
+```
 cp -ipv terasoluna-tourreservation-web/target/terasoluna-tourreservation-web.war /opt/tomcat/webapps/
 ls /opt/tomcat/webapps/
+```
 
 http://192.168.128.131/terasoluna-tourreservation-web/
+
 ⇒ ツアー検索する
 ⇒ 北海道→北海道 で検索
 

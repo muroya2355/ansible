@@ -41,13 +41,17 @@
     dest:  /opt
     remote_src: yes
   become: yes
-  when: not tomcat_dir.stat.exists
+  when:
+    - not tomcat_dir.stat.exists
+    - not ansible_check_mode
 
 - name: リンクの作成（/opt/tomcat -> /opt/apache-tomcat-9.0.30）
   file: src=/opt/apache-tomcat-9.0.30 path=/opt/tomcat state=link
+  when: not ansible_check_mode
 
 - name: ディレクトリの属性変更
   file: path=/opt/tomcat owner=tomcat group=tomcat state=directory recurse=yes
+  when: not ansible_check_mode
 
 # 設定ファイル配置
 - name: serviceファイルの配置
@@ -64,6 +68,7 @@
     group: tomcat
     mode: 0644
 
+
 # ログ出力先の変更
 - name: ディレクトリの作成
   file: path=/var/log/tomcat state=directory owner=tomcat group=tomcat mode=0750
@@ -73,6 +78,7 @@
 
 - name: リンクの作成
   file: src=/var/log/tomcat path=/opt/tomcat/logs state=link
+  when: not ansible_check_mode
 
 # サービス起動
 - name: サービスの起動

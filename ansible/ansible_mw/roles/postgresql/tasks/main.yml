@@ -3,6 +3,7 @@
 # インストール
 - name: リポジトリパッケージのインストール
   yum: name=https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+  when: not ansible_check_mode
 
 - name: postgresql12のインストール
   yum:
@@ -10,6 +11,7 @@
       - postgresql12-server
       - python-psycopg2
     state: latest
+  when: not ansible_check_mode
 
 # データベースクラスタの作成
 - name: クラスタの存在確認
@@ -49,6 +51,15 @@
     group: postgres
     mode: 0600
 
+# ファイアウォール設定
+- name: firewalldでTCP5432を許可
+  firewalld: permanent=True service=postgresql state=enabled immediate=true
+
+# サービス起動
+- name: サービスの起動
+  service: name=postgresql-12 state=restarted enabled=yes
+
+
 # データベース・ユーザの作成
 - name : create database
   postgresql_db:
@@ -57,6 +68,7 @@
     login_user: postgres
   become_user: postgres
   become: yes
+  when: not ansible_check_mode
 
 - name: create user
   postgresql_user: 
@@ -68,11 +80,4 @@
     login_user: postgres
   become_user: postgres
   become: yes
-
-# ファイアウォール設定
-- name: firewalldでTCP5432を許可
-  firewalld: permanent=True service=postgresql state=enabled immediate=true
-
-# サービス起動
-- name: サービスの起動
-  service: name=postgresql-12 state=restarted enabled=yes
+  when: not ansible_check_mode

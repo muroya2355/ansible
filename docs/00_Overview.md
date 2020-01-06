@@ -60,7 +60,7 @@
 
 <img width=50% src="./figure/Overview-ESXi内部設定（初期）.png">
 
-### [ESXiネットワーク設定](./05_ESXiネットワーク設定.md)
+### [ESXi仮想ネットワーク設定](./05_ESXiネットワーク設定.md)
 
 * 仮想スイッチの作成
 

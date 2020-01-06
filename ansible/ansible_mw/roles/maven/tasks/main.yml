@@ -21,19 +21,10 @@
     dest:  /opt
     remote_src: yes
   become: yes
-  when: not maven_dir.stat.exists
+  when:
+    - not maven_dir.stat.exists
+    - not ansible_check_mode
 
 - name: リンクの作成（/opt/maven -> /opt/apache-maven-3.6.3）
   file: src=/opt/apache-maven-3.6.3 path=/opt/maven state=link
-
-# 設定ファイルの配置
-- name: .bash_profileに追記
-  blockinfile:
-    dest: /root/.bash_profile
-    insertafter: EOF
-    content: |
-      JAVA_HOME=/usr/lib/jvm/java-11-openjdk
-      export PATH=$PATH:/opt/maven/bin
-
-- name: .bash_profileの反映
-  shell: source /root/.bash_profile
+  when: not ansible_check_mode
