@@ -1,0 +1,62 @@
+all:
+  hosts:
+    WebAP:
+      disk: 4
+      memory: 1024
+      cpu: 1
+      nic:
+        nic1:
+          type: vmxnet3
+          network: VMM Network
+          network_type: standard
+        nic2:
+          type: vmxnet3
+          network: VMW Network
+          network_type: standard
+        nic3:
+          type: vmxnet3
+          network: VMP Network
+          network_type: standard
+      os: centos7_64Guest
+      iso_path: 'datastore1/iso/CentOS-7-KickStart.iso'
+    DB:
+      disk: 4
+      memory: 1024
+      cpu: 1
+      nic:
+        nic1:
+          type: vmxnet3
+          network: VMM Network
+          network_type: standard
+        nic2:
+          type: vmxnet3
+          network: VMP Network
+          network_type: standard
+      os: centos7_64Guest
+      iso_path: 'datastore1/iso/CentOS-7-KickStart.iso'
+    VyOS:
+      disk: 2
+      memory: 512
+      cpu: 1
+      nic:
+        nic1:
+          type: vmxnet3
+          network: VMM Network
+          network_type: standard
+        nic2:
+          type: vmxnet3
+          network: VMW Network
+          network_type: standard
+        nic3:
+          type: vmxnet3
+          network: VMP Network
+          network_type: standard
+      os: debian8_64Guest
+      iso_path: 'datastore1/iso/vyos-rolling-latest.iso'
+  vars:
+    esx_hostname: 'ESXI-HOST.localdomain'
+    esx_ipaddr: '192.168.153.126'
+    esx_user: 'root'
+    esx_password: 'sN$87fzS'
+    datastore_name: 'datastore1'
+

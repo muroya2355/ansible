@@ -1,17 +1,31 @@
-# 構成
+## アプリケーション
 
-C:\Users\user\Desktop\shared\terasoluna-tourreservation\terasoluna-tourreservation-env\src\main\resources\META-INF\spring\terasoluna-tourreservation-infra.properties
+Terasolunaのサンプルアプリケーションを使用する
+
+[Tour Reservation Sample Application](https://github.com/terasolunaorg/terasoluna-tourreservation)
+
+## ソースコードのダウンロード
+
+## ソースコード編集
+
+```
+terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-env\src\main\resources\META-INF\spring\terasoluna-tourreservation-infra.properties
+```
+
 ⇒
 database.url=jdbc:postgresql://192.168.128.132/tourreserve
 database.username=appuser
 database.password=password
 
-
-‪C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-initdb\pom.xml
-
-C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-env\configs\tomcat9-postgresql\ContainerConfigXML\context.xml
-
-C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-env\configs\tomcat-postgresql\ContainerConfigXML\context.xml
+```
+terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-initdb\pom.xml
+```
+```
+terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-env\configs\tomcat9-postgresql\ContainerConfigXML\context.xml
+```
+```
+terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-env\configs\tomcat-postgresql\ContainerConfigXML\context.xml
+```
 
 <!--
 C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-env\configs\tomcat85-postgresql\ContainerConfigXML
@@ -19,25 +33,27 @@ C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna
 C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna-tourreservation-env\configs\tomcat8-postgresql\ContainerConfigXML
 -->
 
+## ソースコードのビルド
+
 ```
-scp -r /mnt/hgfs/shared/terasoluna-tourreservation-5.5.1.RELEASE root@192.168.153.131:~/
+# scp -r /mnt/hgfs/shared/terasoluna-tourreservation-5.5.1.RELEASE root@192.168.153.131:~/
 ```
 
 ```
-ssh root@192.168.153.131
-ls
-cd terasoluna-tourreservation-5.5.1.RELEASE/
+# ssh root@192.168.153.131
+# ls
+# cd terasoluna-tourreservation-5.5.1.RELEASE/
 ```
 
 ```
-mvn -f terasoluna-tourreservation-initdb/pom.xml sql:execute
-mvn clean install
-ls terasoluna-tourreservation-web/target/terasoluna-tourreservation-web.war
+# mvn -f terasoluna-tourreservation-initdb/pom.xml sql:execute
+# mvn clean install
+# ls terasoluna-tourreservation-web/target/terasoluna-tourreservation-web.war
 ```
 
 ```
-cp -ipv terasoluna-tourreservation-web/target/terasoluna-tourreservation-web.war /opt/tomcat/webapps/
-ls /opt/tomcat/webapps/
+# cp -ipv terasoluna-tourreservation-web/target/terasoluna-tourreservation-web.war /opt/tomcat/webapps/
+# ls /opt/tomcat/webapps/
 ```
 
 http://192.168.128.131/terasoluna-tourreservation-web/

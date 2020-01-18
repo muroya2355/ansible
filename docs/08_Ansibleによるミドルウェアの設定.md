@@ -123,4 +123,38 @@ ansible-playbook --check -i staging site.yml
 ansible-playbook -i staging site.yml
 ```
 
+```
+PLAY [deploy webservers] *******************************************************
+
+(省略)
+
+PLAY RECAP *********************************************************************
+192.168.153.131            : ok=28   changed=8    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0
+192.168.153.132            : ok=15   changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+```
+
 ## 結果確認
+
+### Apache
+
+ホストOSのブラウザから以下のURLにアクセス
+
+http://192.168.128.131/
+
+Apache の 404 Not Found ページが出てくればOK
+
+### Tomcat
+
+ホストOSのブラウザから以下のURLにアクセス
+
+http://192.168.128.131/terasoluna-tourreservation-web/
+
+Apache の 404 Not Found ページが出てくればOK
+
+### PostgreSQL
+
+ホストOSに pgAdmin4 をインストールし、DBサーバの tourreserve データベースに接続
+
+⇒ 接続できればOK
+
+

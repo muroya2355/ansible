@@ -9,7 +9,9 @@
 # javaがインストールされていない場合, Javaをインストール
 - name: OpenJDK11のインストール
   yum: name=java-11-openjdk-devel state=present
-  when: java_which.rc == 1
+  when:
+    - not ansible_check_mode
+    - java_which.rc == 1
 
 
 # 環境変数の設定

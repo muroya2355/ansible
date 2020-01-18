@@ -1,0 +1,40 @@
+---
+- hosts: all
+  connection: local
+  user: remote
+  become: true
+  become_method: sudo
+  gather_facts: false
+
+  tasks:
+    - vsphere_guest:
+        vcenter_hostname: "{{ esx_ipaddr }}"
+        username: "{{ esx_user }}"
+        password: "{{ esx_password }}"
+        guest: "{{ inventory_hostname }}"
+        state: powered_on
+        validate_certs: False
+
+        vm_hw_version: vmx-08
+        vm_extra_config:
+          isolation.tools.copy.disable: "FALSE"
+          isolation.tools.paste.disable: "FALSE"
+          isolation.tools.setGUIOptions.enable: "TRUE"
+        vm_disk:
+          disk1:
+            size_gb: "{{ disk }}"
+            type: thin
+            datastore: "{{ datastore_name }}"
+        vm_nic: "{{ nic }}"
+        vm_hardware:
+          memory_mb: "{{ memory }}"
+          osid: centos7_64Guest
+          num_cpus: "{{ cpu }}"
+          scsi: paravirtual
+          vm_cdrom:
+            type: "iso"
+            iso_path: "{{ iso_path }}"
+        esxi:
+          datacenter: ha-datacenter
+          hostname: "{{ esx_hostname }}"
+
