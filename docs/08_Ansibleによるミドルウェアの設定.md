@@ -10,52 +10,53 @@
 ### webap/dbサーバで.sshディレクトリの作成
 
 ```
-ssh root@192.168.153.131
-ssh root@192.168.153.132
+# ssh root@192.168.153.131
+# ssh root@192.168.153.132
 ```
 
 ```
-mkdir -pv ~/.ssh
-exit
+# mkdir -pv ~/.ssh
+# exit
 ```
 
 ### 構成管理サーバでキーペアの作成
 
 ```
-cd ~/.ssh
-ssh-keygen -t rsa -f id_rsa
+# cd ~/.ssh
+# ssh-keygen -t rsa -f id_rsa
 パスワードは空欄
 ```
 
 ### サーバに鍵を転送
 
 ```
-scp ./id_rsa.pub root@192.168.153.131:~/.ssh/
-scp ./id_rsa.pub root@192.168.153.132:~/.ssh/
+# scp ./id_rsa.pub root@192.168.153.131:~/.ssh/
+# scp ./id_rsa.pub root@192.168.153.132:~/.ssh/
 パスワード : [sN$87fzS]
 ```
 
 ### サーバ側の設定
 
 ```
-ssh root@192.168.153.131
-ssh root@192.168.153.132
+# ssh root@192.168.153.131
+# ssh root@192.168.153.132
+パスワード : [sN$87fzS]
 ```
 
 ```
-cd ~
-chmod 700 .ssh
-cd .ssh
-cat id_rsa.pub >> authorized_keys
-chmod 600 authorized_keys
-rm -iv id_rsa.pub
+# cd ~
+# chmod 700 .ssh
+# cd .ssh
+# cat id_rsa.pub >> authorized_keys
+# chmod 600 authorized_keys
+# rm -iv id_rsa.pub
 [y]
 ```
 
 ```
-cp -ipv /etc/ssh/sshd_config /etc/ssh/sshd_config.org
-vi /etc/ssh/sshd_config
-diff /etc/ssh/sshd_config /etc/ssh/sshd_config.org
+# cp -ipv /etc/ssh/sshd_config /etc/ssh/sshd_config.org
+# vi /etc/ssh/sshd_config
+# diff /etc/ssh/sshd_config /etc/ssh/sshd_config.org
 ⇒
 43c43
 < PubkeyAuthentication yes
@@ -68,8 +69,8 @@ diff /etc/ssh/sshd_config /etc/ssh/sshd_config.org
 /usr/sbin/sshd
 # /usr/sbin/sshd -t
 ⇒ 何も表示されない
-systemctl restart sshd
-systemctl status sshd
+# systemctl restart sshd
+# systemctl status sshd
 
 exit
 ⇒ 構成管理サーバに戻る
@@ -78,10 +79,10 @@ exit
 ### 構成管理サーバからSSHログイン確認
 
 ```
-ssh -i ~/.ssh/id_rsa root@192.168.153.131
-ssh -i ~/.ssh/id_rsa root@192.168.153.132
+# ssh -i ~/.ssh/id_rsa root@192.168.153.131
+# ssh -i ~/.ssh/id_rsa root@192.168.153.132
 ⇒ サーバにログイン
-exit
+# exit
 ⇒ 構成管理サーバに戻る
 ```
 

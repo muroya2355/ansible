@@ -47,7 +47,24 @@ C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna
 
 ```
 # mvn -f terasoluna-tourreservation-initdb/pom.xml sql:execute
+⇒
+[INFO] 28 of 28 SQL statements executed successfully
+[INFO] ---------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ---------------------------------------------------------------
+[INFO] Total time:  50.829 s
+[INFO] Finished at: 2020-01-19T13:35:18+09:00
+[INFO] ---------------------------------------------------------------
+
 # mvn clean install
+⇒
+[INFO] ---------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ---------------------------------------------------------------
+[INFO] Total time:  05:01 min
+[INFO] Finished at: 2020-01-19T13:40:33+09:00
+[INFO] ---------------------------------------------------------------
+
 # ls terasoluna-tourreservation-web/target/terasoluna-tourreservation-web.war
 ```
 
@@ -57,6 +74,7 @@ C:\Users\user\Desktop\shared\terasoluna-tourreservation-5.5.1.RELEASE\terasoluna
 ```
 
 http://192.168.128.131/terasoluna-tourreservation-web/
+
 
 ⇒ ツアー検索する
 ⇒ 北海道→北海道 で検索
